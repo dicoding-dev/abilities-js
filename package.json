@@ -1,0 +1,27 @@
+{
+  "name": "abilities-js",
+  "version": "0.5.0",
+  "description": "A core package for managing the authorization through CanCanCan style. With supports of granularity based on Attributes Based Access Control.",
+  "main": "index.js",
+  "scripts": {
+    "test": "vitest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dicoding-dev/abilities-js.git"
+  },
+  "keywords": [
+    "abilities",
+    "authorization",
+    "abac"
+  ],
+  "author": "AlexzPurewoko",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dicoding-dev/abilities-js/issues"
+  },
+  "homepage": "https://github.com/dicoding-dev/abilities-js#readme",
+  "dependencies": {
+    "vitest": "^1.0.4"
+  }
+}
