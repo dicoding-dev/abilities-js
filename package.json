@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/dicoding-dev/abilities-js#readme",
   "dependencies": {
+    "object-deep-compare": "^1.2.0",
     "vitest": "^1.0.4"
   }
 }
