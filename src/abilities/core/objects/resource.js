@@ -97,10 +97,8 @@ export class Resource {
 
         if (this.#fieldType === FieldType.ARRAY) {
             if (typeof field === 'array' || field instanceof Array) {
-                console.log('dsdsd');
                 for(const itemField of field) {
                     if (!this.#field.includes(itemField)) {
-                        console.log('doesnt include : ' + itemField)
                         return false;
                     }
                 }
