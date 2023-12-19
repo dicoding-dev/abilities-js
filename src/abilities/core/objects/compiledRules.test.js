@@ -60,4 +60,15 @@ describe("Compile and query rules", function () {
         expect(rules3.map((item) => item.getRuleId()))
             .toStrictEqual([5, 7]);
     });
+
+    it('can load as string array with readOnly basis', () => {
+        const compiledRules = new CompiledRules([
+            'scope1:resourceA:edit',
+            'scope1:resourceB:read'
+        ], true);
+        const queried = compiledRules.queryRule('scope1', 'resourceB', 'read');
+
+        expect(queried).to.not.empty;
+        expect(queried.map((rule) => rule.toString())).toStrictEqual(['scope1:resourceB/*:read'])
+    });
 });
