@@ -1,3 +1,5 @@
+import ObjectDeepCompare from 'object-deep-compare';
+
 const FieldType = {
     ALL: 1,
     SINGULAR_FIELD: 2,
@@ -17,7 +19,7 @@ export class Resource {
      * @param {int|string|array|object} field An attributes of a resource.
      */
     constructor(resource, field) {
-        this.#resource = resource;
+        this.#resource = resource?.trim() ?? '';
         this.#field = field;
 
         if (this.#resource.length < 1) {
@@ -38,7 +40,7 @@ export class Resource {
             return;
         }
 
-        if (typeof this.#field === 'array') {
+        if (typeof this.#field === 'array' || this.#field instanceof Array) {
             this.#fieldType = FieldType.ARRAY;
             return;
         }
@@ -70,6 +72,49 @@ export class Resource {
      */
     allField() {
         return this.#fieldType === FieldType.ALL;
+    }
+
+    /**
+     * @param {int|string|array|object} field 
+     * @returns boolean
+     */
+    matchField(field) {
+        if (this.allField()) {
+            return true;
+        }
+
+        if (!field) {
+            return false;
+        }
+
+        if (this.#fieldType === FieldType.SINGULAR_FIELD) {
+            if (!this.#isSingularField(field)) {
+                return false;
+            }
+
+            return `${this.#field}` === `${field}`;
+        }
+
+        if (this.#fieldType === FieldType.ARRAY) {
+            if (typeof field === 'array' || field instanceof Array) {
+                console.log('dsdsd');
+                for(const itemField of field) {
+                    if (!this.#field.includes(itemField)) {
+                        console.log('doesnt include : ' + itemField)
+                        return false;
+                    }
+                }
+
+                return true;
+            }
+
+            return this.#field.includes(field);
+        }
+
+        if (this.#fieldType === FieldType.OBJECT) {
+            const result = ObjectDeepCompare.CompareValuesWithConflicts(this.#field, field);
+            return result.length === 0;
+        }
     }
 
     /**
