@@ -1,1 +1,4 @@
-export type FieldAttribute = number | string | Array<number|string> | object;
+export type FieldAttribute =
+    '*' | null |
+    number | string |
+    number[] | string[] | object;
