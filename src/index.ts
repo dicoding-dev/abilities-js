@@ -1,5 +1,5 @@
 
-import { Scope, Resource, Action, Rule, CompiledRules } from "./core/objects";
+import { Scope, Resource, Action, Rule, CompiledRules } from "./core/objects/index";
 
 import { RuleCompiler } from "./core/compiler/ruleCompiler";
 import { AbilityChecker } from "./core/comparator/abilityChecker";
