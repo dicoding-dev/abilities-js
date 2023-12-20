@@ -50,12 +50,12 @@
   },
   "homepage": "https://github.com/dicoding-dev/abilities-js#readme",
   "dependencies": {
-    "object-deep-compare": "^1.2.0",
-    "rimraf": "^5.0.5"
+    "object-deep-compare": "^1.2.0"
   },
   "devDependencies": {
     "parcel": "^2.10.3",
     "typescript": "^5.3.3",
-    "vitest": "^1.0.4"
+    "vitest": "^1.0.4",
+    "rimraf": "^5.0.5"
   }
 }
