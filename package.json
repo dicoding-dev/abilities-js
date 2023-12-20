@@ -1,12 +1,29 @@
 {
   "name": "abilities-js",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "A core package for managing the authorization through CanCanCan style. With supports of granularity based on Attributes Based Access Control.",
-  "source": "src/abilities/core/index.js",
-  "main": "dist/abilities-core/index.js",
-  "module": "dist/abilities-core/module.js",
+  "source": "src/index.ts",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "publishConfig": {
+    "exports": {
+      ".": "./dist/index.js"
+    },
+    "types": "./dist/index.d.ts"
+  },
+  "files": [
+    "dist/"
+  ],
   "scripts": {
-    "build": "parcel build",
+    "build": "tsc -p tsconfig.json",
+    "prepublishOnly": "npm run build",
     "test": "vitest"
   },
   "repository": {
@@ -25,11 +42,11 @@
   },
   "homepage": "https://github.com/dicoding-dev/abilities-js#readme",
   "dependencies": {
-    "object-deep-compare": "^1.2.0",
-    "typescript": "^5.3.3"
+    "object-deep-compare": "^1.2.0"
   },
   "devDependencies": {
     "parcel": "^2.10.3",
+    "typescript": "^5.3.3",
     "vitest": "^1.0.4"
   }
 }
