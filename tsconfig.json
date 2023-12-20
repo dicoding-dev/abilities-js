@@ -110,7 +110,7 @@
       "./src"
     ],
     "exclude": [
-      "./src/*.test.ts"
+      "**/*.test.ts"
     ]
   }
   
