@@ -31,7 +31,7 @@
     "dist/"
   ],
   "scripts": {
-    "build": "rimraf dist && tsc -p tsconfig.json && tsc -p tsconfig-cjs.json",
+    "build": "rimraf dist && tsc -p tsconfig.json && tsc -p tsconfig-cjs.json && fix-esm-import-path dist/**/*.js",
     "prepublishOnly": "npm run build",
     "test": "vitest"
   },
@@ -55,8 +55,9 @@
   },
   "devDependencies": {
     "parcel": "^2.10.3",
+    "rimraf": "^5.0.5",
     "typescript": "^5.3.3",
-    "vitest": "^1.0.4",
-    "rimraf": "^5.0.5"
+    "fix-esm-import-path": "^1.5.0",
+    "vitest": "^1.0.4"
   }
 }
