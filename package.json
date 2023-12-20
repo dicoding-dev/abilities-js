@@ -42,7 +42,8 @@
   },
   "homepage": "https://github.com/dicoding-dev/abilities-js#readme",
   "dependencies": {
-    "object-deep-compare": "^1.2.0"
+    "object-deep-compare": "^1.2.0",
+    "rimraf": "^5.0.5"
   },
   "devDependencies": {
     "parcel": "^2.10.3",
