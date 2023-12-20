@@ -1,6 +1,6 @@
 {
   "name": "@dicoding-dev/abilities-js",
-  "version": "0.5.4",
+  "version": "0.5.5",
   "description": "A core package for managing the authorization through CanCanCan style. With supports of granularity based on Attributes Based Access Control.",
   "source": "src/index.ts",
   "main": "dist/cjs/index.js",
@@ -28,7 +28,7 @@
     "types": "./dist/index.d.ts"
   },
   "files": [
-    "dist/"
+    "dist"
   ],
   "scripts": {
     "build": "rimraf dist && tsc -p tsconfig.json && tsc -p tsconfig-cjs.json && fix-esm-import-path dist/**/*.js",
