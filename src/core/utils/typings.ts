@@ -1,0 +1,1 @@
+export type FieldAttribute = number | string | Array<number|string> | object;
