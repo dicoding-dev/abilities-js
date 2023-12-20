@@ -1,5 +1,5 @@
-import { RuleCompiler } from "../compiler/ruleCompiler";
-import { Rule } from "../objects/rule";
+import { RuleCompiler } from "../compiler/ruleCompiler.js";
+import { Rule } from "../objects/rule.js";
 export class AbilityChecker {
     /**
      * @param {CompiledRules} compiledRules

@@ -1,4 +1,4 @@
-import { RuleCompiler } from '../compiler/ruleCompiler';
+import { RuleCompiler } from '../compiler/ruleCompiler.js';
 export class CompiledRules {
     /**
      * Compile a list of rules. There are 2 mode for this.

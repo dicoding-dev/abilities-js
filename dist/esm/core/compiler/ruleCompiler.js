@@ -1,7 +1,7 @@
-import { Action } from "../objects/action";
-import { Resource } from "../objects/resource";
-import { Rule } from "../objects/rule";
-import { Scope } from "../objects/scope";
+import { Action } from "../objects/action.js";
+import { Resource } from "../objects/resource.js";
+import { Rule } from "../objects/rule.js";
+import { Scope } from "../objects/scope.js";
 export class RuleCompiler {
     /**
      * Compile the syntax rule to the corresponding @see {Rule} object.

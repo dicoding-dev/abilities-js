@@ -1,12 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ReadOnlyAbilityRepository = exports.StorageInterface = exports.AbilityChecker = exports.RuleCompiler = exports.CompiledRules = exports.Rule = exports.Action = exports.Resource = exports.Scope = void 0;
-const objects_1 = require("./core/objects");
-Object.defineProperty(exports, "Scope", { enumerable: true, get: function () { return objects_1.Scope; } });
-Object.defineProperty(exports, "Resource", { enumerable: true, get: function () { return objects_1.Resource; } });
-Object.defineProperty(exports, "Action", { enumerable: true, get: function () { return objects_1.Action; } });
-Object.defineProperty(exports, "Rule", { enumerable: true, get: function () { return objects_1.Rule; } });
-Object.defineProperty(exports, "CompiledRules", { enumerable: true, get: function () { return objects_1.CompiledRules; } });
+const index_1 = require("./core/objects/index");
+Object.defineProperty(exports, "Scope", { enumerable: true, get: function () { return index_1.Scope; } });
+Object.defineProperty(exports, "Resource", { enumerable: true, get: function () { return index_1.Resource; } });
+Object.defineProperty(exports, "Action", { enumerable: true, get: function () { return index_1.Action; } });
+Object.defineProperty(exports, "Rule", { enumerable: true, get: function () { return index_1.Rule; } });
+Object.defineProperty(exports, "CompiledRules", { enumerable: true, get: function () { return index_1.CompiledRules; } });
 const ruleCompiler_1 = require("./core/compiler/ruleCompiler");
 Object.defineProperty(exports, "RuleCompiler", { enumerable: true, get: function () { return ruleCompiler_1.RuleCompiler; } });
 const abilityChecker_1 = require("./core/comparator/abilityChecker");
