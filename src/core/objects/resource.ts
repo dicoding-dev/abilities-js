@@ -1,13 +1,6 @@
 import ObjectDeepCompare from 'object-deep-compare';
 import { FieldAttribute } from '../utils/typings';
 
-// const FieldType = {
-//     ALL: 1,
-//     SINGULAR_FIELD: 2,
-//     ARRAY: 3,
-//     OBJECT: 4,
-// };
-
 enum FieldType {
     ALL,
     SINGULAR_FIELD,
