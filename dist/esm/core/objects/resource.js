@@ -1,10 +1,4 @@
 import ObjectDeepCompare from 'object-deep-compare';
-// const FieldType = {
-//     ALL: 1,
-//     SINGULAR_FIELD: 2,
-//     ARRAY: 3,
-//     OBJECT: 4,
-// };
 var FieldType;
 (function (FieldType) {
     FieldType[FieldType["ALL"] = 0] = "ALL";
@@ -16,7 +10,7 @@ export class Resource {
     /**
      *
      * @param {string} resource A resource or subjectname
-     * @param {number|string|array|object} field An attributes of a resource.
+     * @param {FieldAttribute} field An attributes of a resource.
      */
     constructor(resource, field = null) {
         var _a;

@@ -65,7 +65,7 @@ class RuleCompiler {
         const fieldLength = ++rightCursor - leftCursor;
         let field = null;
         if (fieldLength > 0) {
-            const fieldStr = ruleSyntax.substring(leftCursor, rightCursor);
+            const fieldStr = ruleSyntax.substring(leftCursor, rightCursor).trim();
             if (fieldStr[0] !== '[' && fieldStr[0] !== '{') {
                 field = fieldStr;
             }

@@ -5,12 +5,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Resource = void 0;
 const object_deep_compare_1 = __importDefault(require("object-deep-compare"));
-// const FieldType = {
-//     ALL: 1,
-//     SINGULAR_FIELD: 2,
-//     ARRAY: 3,
-//     OBJECT: 4,
-// };
 var FieldType;
 (function (FieldType) {
     FieldType[FieldType["ALL"] = 0] = "ALL";
@@ -22,7 +16,7 @@ class Resource {
     /**
      *
      * @param {string} resource A resource or subjectname
-     * @param {number|string|array|object} field An attributes of a resource.
+     * @param {FieldAttribute} field An attributes of a resource.
      */
     constructor(resource, field = null) {
         var _a;

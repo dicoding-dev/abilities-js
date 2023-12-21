@@ -124,7 +124,8 @@ export class AbilityChecker {
         }
         const queriedRule = this.compiledRules.queryRule(rule.getScope().get(), rule.getResource().getResourceStr(), rule.getAction().get());
         for (const foundRule of queriedRule) {
-            if (foundRule.getResource().matchField(rule.getResource().getField())) {
+            if (foundRule.getResource().matchField(rule.getResource().getField())
+                && foundRule.inverted() === rule.inverted()) {
                 return foundRule;
             }
         }
