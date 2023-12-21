@@ -20,7 +20,7 @@ export class Resource {
     /**
      * 
      * @param {string} resource A resource or subjectname
-     * @param {number|string|array|object} field An attributes of a resource.
+     * @param {FieldAttribute} field An attributes of a resource.
      */
     constructor(resource: string, field: FieldAttribute = null) {
         this.resource = resource?.trim() ?? '';
