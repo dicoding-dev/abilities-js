@@ -44,7 +44,7 @@
     "authorization",
     "abac"
   ],
-  "author": "AlexzPurewoko",
+  "author": "AlexzPurewoko <purwoko908@gmail.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/dicoding-dev/abilities-js/issues"
