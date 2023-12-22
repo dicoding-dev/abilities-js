@@ -111,7 +111,6 @@ export class AbilityChecker {
      */
     cannot(...args: any[]): boolean {
         // @ts-ignore
-        // @todo Please overload this function!
         return !this.can(...arguments);
     }
     
