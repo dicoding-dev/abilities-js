@@ -1,6 +1,7 @@
 import { RuleCompiler } from "../compiler/ruleCompiler";
 import { CompiledRules } from "../objects/compiledRules";
 import { Rule } from "../objects/rule";
+import { FieldAttribute } from "../utils/typings";
 
 export class AbilityChecker {
 
@@ -43,7 +44,7 @@ export class AbilityChecker {
      * 
      * @returns {boolean} true if the current user has the capabilities for current rule
      */
-    can(): boolean {
+    can(...args: any[]): boolean {
         const argumentLength = arguments.length;
         let scope = 'global'; // default scope
         let resource = '';
@@ -109,7 +110,7 @@ export class AbilityChecker {
      *
      * @return bool true if the current user does not have the capabilities for current rule
      */
-    cannot(): boolean {
+    cannot(...args: any[]): boolean {
         // @ts-ignore
         // @todo Please overload this function!
         return !this.can(...arguments);
