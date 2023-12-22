@@ -121,7 +121,7 @@ export class AbilityChecker {
      * scope:resource/field:action
      *
      *
-     * @param {(Rule|string)} $ruleOrSyntax A syntax (string) for defining rules or with using Rule
+     * @param {(Rule|string)} ruleOrSyntax A syntax (string) for defining rules or with using Rule
      * @return {boolean} true if the current user has the rule
      */
     hasRule(ruleOrSyntax: (Rule|string)): boolean {
