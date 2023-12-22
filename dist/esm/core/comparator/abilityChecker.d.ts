@@ -36,21 +36,21 @@ export declare class AbilityChecker {
      *
      * @returns {boolean} true if the current user has the capabilities for current rule
      */
-    can(): boolean;
+    can(...args: any[]): boolean;
     /**
      * A negated approach for checking the user abilities.
      * See `can()` for more information.
      *
      * @return bool true if the current user does not have the capabilities for current rule
      */
-    cannot(): boolean;
+    cannot(...args: any[]): boolean;
     /**
      * Use the same approach as method `can()` does. But via customized syntax or rules.
      * Via Syntax :
      * scope:resource/field:action
      *
      *
-     * @param {(Rule|string)} $ruleOrSyntax A syntax (string) for defining rules or with using Rule
+     * @param {(Rule|string)} ruleOrSyntax A syntax (string) for defining rules or with using Rule
      * @return {boolean} true if the current user has the rule
      */
     hasRule(ruleOrSyntax: (Rule | string)): boolean;

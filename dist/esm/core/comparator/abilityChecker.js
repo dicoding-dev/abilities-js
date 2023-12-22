@@ -37,8 +37,8 @@ export class AbilityChecker {
      *
      * @returns {boolean} true if the current user has the capabilities for current rule
      */
-    can() {
-        const argumentLength = arguments.length;
+    can(...args) {
+        const argumentLength = args.length;
         let scope = 'global'; // default scope
         let resource = '';
         let action = '';
@@ -47,7 +47,7 @@ export class AbilityChecker {
             throw new Error('Cannot pass with empty argument');
         }
         if (argumentLength === 1) {
-            let rule = arguments[0];
+            let rule = args[0];
             if (!(rule instanceof Rule)) {
                 rule = RuleCompiler.compile(rule);
             }
@@ -57,10 +57,10 @@ export class AbilityChecker {
             field = rule.getResource().getField();
         }
         else {
-            action = arguments[0];
-            resource = arguments[1];
-            scope = argumentLength >= 3 ? arguments[2] : scope;
-            field = argumentLength >= 4 ? arguments[3] : null;
+            action = args[0];
+            resource = args[1];
+            scope = argumentLength >= 3 ? args[2] : scope;
+            field = argumentLength >= 4 ? args[3] : null;
         }
         const specificActionRules = this.compiledRules.queryRule(scope, resource, action);
         const specificNormalRules = [];
@@ -96,10 +96,9 @@ export class AbilityChecker {
      *
      * @return bool true if the current user does not have the capabilities for current rule
      */
-    cannot() {
+    cannot(...args) {
         // @ts-ignore
-        // @todo Please overload this function!
-        return !this.can(...arguments);
+        return !this.can(...args);
     }
     /**
      * Use the same approach as method `can()` does. But via customized syntax or rules.
@@ -107,7 +106,7 @@ export class AbilityChecker {
      * scope:resource/field:action
      *
      *
-     * @param {(Rule|string)} $ruleOrSyntax A syntax (string) for defining rules or with using Rule
+     * @param {(Rule|string)} ruleOrSyntax A syntax (string) for defining rules or with using Rule
      * @return {boolean} true if the current user has the rule
      */
     hasRule(ruleOrSyntax) {
