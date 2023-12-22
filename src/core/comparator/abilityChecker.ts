@@ -44,7 +44,7 @@ export class AbilityChecker {
      * @returns {boolean} true if the current user has the capabilities for current rule
      */
     can(...args: any[]): boolean {
-        const argumentLength = arguments.length;
+        const argumentLength = args.length;
         let scope = 'global'; // default scope
         let resource = '';
         let action = '';
@@ -55,7 +55,7 @@ export class AbilityChecker {
         }
 
         if (argumentLength === 1) {
-            let rule = arguments[0];
+            let rule = args[0];
             if (!(rule instanceof Rule)) {
                 rule = RuleCompiler.compile(rule);
             }
@@ -65,10 +65,10 @@ export class AbilityChecker {
             action = rule.getAction().get();
             field = rule.getResource().getField();
         } else {
-            action = arguments[0];
-            resource = arguments[1];
-            scope = argumentLength >= 3 ? arguments[2] : scope;
-            field = argumentLength >= 4 ? arguments[3] : null;
+            action = args[0];
+            resource = args[1];
+            scope = argumentLength >= 3 ? args[2] : scope;
+            field = argumentLength >= 4 ? args[3] : null;
         }
 
         const specificActionRules = this.compiledRules.queryRule(scope, resource, action);
@@ -111,7 +111,7 @@ export class AbilityChecker {
      */
     cannot(...args: any[]): boolean {
         // @ts-ignore
-        return !this.can(...arguments);
+        return !this.can(...args);
     }
     
     /**
