@@ -1,7 +1,6 @@
 import { RuleCompiler } from "../compiler/ruleCompiler";
 import { CompiledRules } from "../objects/compiledRules";
 import { Rule } from "../objects/rule";
-import { FieldAttribute } from "../utils/typings";
 
 export class AbilityChecker {
 
