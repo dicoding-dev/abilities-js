@@ -1,6 +1,3 @@
-// @ts-nocheck
-// @todo Please revise the design of function next!
-
 import { describe, it, test, expect } from "vitest";
 import { CompiledRules } from "../objects/compiledRules";
 import { AbilityChecker } from "./abilityChecker";
