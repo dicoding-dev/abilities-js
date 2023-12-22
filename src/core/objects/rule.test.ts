@@ -42,16 +42,15 @@ describe("toString function test", () => {
         expect(`${rule}`).toEqual("scope:resource/*:action");
     });
     test("successfully rule with custom resource", () => {
-        // @ts-ignore
-        // @todo fix this and make sure it's not ignoring ts checking
         const rule = makeRule({
-            resource :   new Resource(
+            resource : new Resource(
                 'res',
                 {
                     'param_1' : 22
                 }
-            )
-            });
+            ),
+            inverted : false
+        });
         expect(`${rule}`).toEqual("scope:res/{\"param_1\":22}:action");
     });
 });
