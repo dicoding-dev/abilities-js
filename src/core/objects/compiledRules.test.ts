@@ -48,6 +48,17 @@ describe("Compile and query rules", function () {
         expect(compiledRules.queryRule('scope1', 'resource1', 'delete')).to.be.empty;
     });
 
+    it('must return all rule when action is unspecified', () => {
+        expect(
+            compiledRules.queryRule('scope1', 'resource1', '').map((rule: Rule) => rule.toString())
+        ).toStrictEqual([
+            'scope1:resource1/666:*',
+            'scope1:resource1/5:read',
+            'scope1:resource1/[10,11,12]:read',
+            'scope1:resource1/{"expired":true}:read'
+        ]);
+    });
+
     it('must return expected rule id', () =>  {
         const rules1 = compiledRules.queryRule('scope1', 'resource1', 'read');
         expect(rules1.map((item: Rule) => item.getRuleId()))
