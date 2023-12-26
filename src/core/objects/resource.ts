@@ -1,5 +1,6 @@
 import ObjectDeepCompare from 'object-deep-compare';
 import { FieldAttribute } from '../utils/typings';
+import { isArrayEqual } from '../utils/utils';
 
 enum FieldType {
     ALL,
@@ -28,6 +29,12 @@ export class Resource {
 
         if (this.resource.length < 1) {
             throw new Error('Resource must not be empty');
+        }
+
+        if (!this.resource.match(/^([a-zA-Z0-9_\-])+$/)) {
+            throw new Error(
+                'Invalid resource naming. Please use a combination of lowercase letter, number, dash and underscore only'
+            );
         }
 
         this.processField();
@@ -122,6 +129,37 @@ export class Resource {
             const result = ObjectDeepCompare.CompareValuesWithConflicts(this.field, field);
             return result.length === 0;
         }
+    }
+
+    isEqualWith(other: Resource) {
+        if (other.getResourceStr() !== this.getResourceStr()) {
+            return false;
+        }
+
+        if (other.getFieldType() !== this.getFieldType()) {
+            return false;
+        }
+
+        switch(this.getFieldType()) {
+            case FieldType.ALL:
+                return true;
+            case FieldType.SINGULAR_FIELD:
+                return other.getField() == this.getField();
+            case FieldType.OBJECT:
+                return ObjectDeepCompare.CompareValuesWithConflicts(
+                    this.getField(),
+                    other.getField()
+                ).length === 0;
+            case FieldType.ARRAY:
+                return isArrayEqual(
+                    this.getField() as any[],
+                    other.getField() as any[]
+                )
+        }
+    }
+
+    getFieldType(): FieldType {
+        return this.fieldType;
     }
 
     /**
