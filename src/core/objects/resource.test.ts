@@ -5,6 +5,12 @@ it("must throw error when passing empty/blank argument on 'resource' ", () =>  {
     expect(() => new Resource('  ')).toThrowError('Resource must not be empty');
 });
 
+it("must throw error when passing invalid resource name", () => {
+    expect(() => new Resource('resource!')).toThrowError(
+        'Invalid resource naming. Please use a combination of lowercase letter, number, dash and underscore only'
+    );
+});
+
 describe("toString function test", () =>  {
     test("successfully encode without field", () =>  {
         expect("" + new Resource("some_resource")).toBe('some_resource/*');
@@ -123,5 +129,94 @@ describe('matchField() function test', () =>  {
                 'age': 10
             })
         ).toBe(false);
+    });
+});
+
+describe('isEqualWith() function test', () => {
+    it('must return false when resource name is different', () => {
+        const base = new Resource('some_resource');
+        const compared = new Resource('some_resource2');
+
+        expect(base.isEqualWith(compared))
+            .toBe(false);
+    });
+
+    it('must return false when resource field type is different', () => {
+        const base = new Resource('some_resource', 5);
+        const compared = new Resource('some_resource', [5, 6]);
+
+        expect(base.isEqualWith(compared))
+            .toBe(false);
+    });
+
+    it('must return true when both resources have star field', () => {
+        const base = new Resource('some_resource', '*');
+        const compared = new Resource('some_resource', '*');
+
+        expect(base.isEqualWith(compared))
+            .toBe(true);
+    });
+
+    it('must return false when both resources have different singular field', () => {
+        const base = new Resource('some_resource', 6);
+        const compared = new Resource('some_resource', 7);
+
+        expect(base.isEqualWith(compared))
+            .toBe(false);
+    });
+
+    it('must return true when both resources have same singular field value', () => {
+        const base = new Resource('some_resource', 7);
+        const compared = new Resource('some_resource', '7');
+
+        expect(base.isEqualWith(compared))
+            .toBe(true);
+    });
+
+    it('must return false when both resources have different array field', () => {
+        const base = new Resource('some_resource', [6, 7, 8]);
+        const compared = new Resource('some_resource', [7, 5, 6]);
+
+        expect(base.isEqualWith(compared))
+            .toBe(false);
+    });
+
+    it('must return true when both resources have same array field', () => {
+        const base = new Resource('some_resource', [6, 7, 8]);
+        const compared = new Resource('some_resource', [7, 8, 6]);
+
+        expect(base.isEqualWith(compared))
+            .toBe(true);
+    });
+
+    it('must return false when both resources have different object field', () => {
+        const base = new Resource('some_resource', {
+            'a' : 1,
+            'b' : 2,
+            'c' : 3
+        });
+        const compared = new Resource('some_resource', {
+            'a' : 1,
+            'b' : 2
+        });
+
+        expect(base.isEqualWith(compared))
+            .toBe(false);
+    });
+
+    it('must return true when both resources have same object field', () => {
+        const base = new Resource('some_resource', {
+            'a' : 1,
+            'b' : 2,
+            'c' : 3
+        });
+        const compared = new Resource('some_resource', {
+            'b' : 2,
+            'c' : 3,
+            'a' : 1
+        });
+
+        expect(base.isEqualWith(compared))
+            .toBe(true);
     });
 });
