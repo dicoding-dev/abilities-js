@@ -63,6 +63,19 @@ export class CompiledRules {
             return [];
         }
 
+        if (action.trim().length === 0) {
+            // @ts-ignore
+            const unspecifiedActions = this.compiledRules[scope][resource];
+            const result = [];
+            for (const key in unspecifiedActions) {
+                const rules = unspecifiedActions[key];
+                for (const rule of rules) {
+                    result.push(rule);
+                }
+            }
+            return result;
+        }
+
         // @ts-ignore
         if (!(action in this.compiledRules[scope][resource])) {
             return [];
