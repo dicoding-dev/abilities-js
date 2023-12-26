@@ -21,21 +21,29 @@ describe('can() feature function test', function () {
     it('must return false when the user have inverted rule', function () {
         const compiledRules = new CompiledRules([
             {
-                'id' : 1,
-                'rule' : 'scope1:resource1:read'
+                id : 1,
+                rule : 'scope2:resource1:read'
             },
             {
-                'id' : 2,
-                'rule' : '!scope1:resource1/666:update'
+                id : 2,
+                rule : '!scope1:resource1/666:update'
             },
             {
-                'id' : 3,
-                'rule' : '!scope1:resource1/[6, 7, 8]:update'
+                id : 3,
+                rule : 'scope1:resource1/[6, 7, 8]:update'
+            },
+            {
+                id : 4,
+                rule : 'scope2:resource1/[6, 7, 8]:update'
+            },
+            {
+                id : 5,
+                rule : '!scope2:resource1/7:update'
             },
         ]);
 
         const abilityChecker = new AbilityChecker(compiledRules);
-        expect(abilityChecker.can('update', 'resource1', 'scope1', 666))
+        expect(abilityChecker.can('update', 'resource1', 'scope2', 7))
             .toBe(false);
     });
 
