@@ -142,11 +142,11 @@ describe('cannot() feature function test', function () {
 
         const user = new AbilityChecker(compiledRules);
         expect(user.cannot('update', 'resource1', 'scope1', {'author' : 666}))
-            .toBeTruthy();
+            .toBe(true);
     });
 });
 
-describe('hasRule() feature function test', function () {
+describe('hasExactRule() feature function test', function () {
     it('must return true when the rule exactly found on the user abilities', function () {
         const compiledRules = new CompiledRules([
             {
@@ -168,8 +168,8 @@ describe('hasRule() feature function test', function () {
         ]);
 
         const user = new AbilityChecker(compiledRules);
-        expect(user.hasRule(RuleCompiler.compile('scope2:resource1/[6, 7, 8]:update')))
-            .toBeTruthy();
+        expect(user.hasExactRule(RuleCompiler.compile('scope2:resource1/[6, 7, 8]:update')))
+            .toBe(true);
     });
 
     it('must return false when the rule is not found on the user abilities', function () {
@@ -193,7 +193,7 @@ describe('hasRule() feature function test', function () {
         ]);
 
         const user = new AbilityChecker(compiledRules);
-        expect(user.hasRule(RuleCompiler.compile('scope2:resource1/[8, 9]:update')))
-            .toBeFalsy();
+        expect(user.hasExactRule(RuleCompiler.compile('scope2:resource1/[8, 9]:update')))
+            .toBe(false);
     });
 });
