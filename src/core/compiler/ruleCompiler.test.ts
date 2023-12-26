@@ -15,13 +15,21 @@ describe("Compile a rule syntax", () => {
         expect(() => RuleCompiler.compile('scope::action')).toThrowError('Resource must not be empty');
     });
 
-
-
     it("must throw error if action is empty", () => {
         expect(() => RuleCompiler.compile('scope:resource:')).toThrowError('Action must not be empty');
     });
 
     describe("must return expected", () => {
+        test('inverted rules', () => {
+            const rule = RuleCompiler.compile('!scope:resource:action');
+
+            expect(rule.getScope().get()).toBe('scope');
+            expect(rule.getResource().getResourceStr()).toBe('resource');
+            expect(rule.getResource().getField()).toBe(null);
+            expect(rule.getAction().get()).toBe('action');
+            expect(rule.inverted()).toBe(true);
+        });
+
         test("when resource have no field", () => {
             const rule = RuleCompiler.compile('scope:resource:action');
 
