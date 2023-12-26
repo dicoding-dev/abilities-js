@@ -11,6 +11,9 @@ class Scope {
         if (this.scope.length < 1) {
             throw new Error('Scope must not be empty');
         }
+        if (!this.scope.match(/^([a-zA-Z0-9_\-])+$/)) {
+            throw new Error('Invalid scope naming. Please use a combination of lowercase letter, number, dash and underscore only');
+        }
     }
     /**
      * @returns string

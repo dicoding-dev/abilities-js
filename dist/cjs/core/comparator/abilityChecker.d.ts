@@ -44,19 +44,6 @@ export declare class AbilityChecker {
      * @return bool true if the current user does not have the capabilities for current rule
      */
     cannot(...args: any[]): boolean;
-    /**
-     * Use the same approach as method `can()` does. But via customized syntax or rules.
-     * Via Syntax :
-     * scope:resource/field:action
-     *
-     *
-     * @param {(Rule|string)} ruleOrSyntax A syntax (string) for defining rules or with using Rule
-     * @return {boolean} true if the current user has the rule
-     */
-    hasRule(ruleOrSyntax: (Rule | string)): boolean;
-    /**
-     * Get the live rule from constructed rule.
-     * @returns {(Rule|null)}
-     */
-    getRuleOf(ruleOrSyntax: (Rule | string)): (Rule | null);
+    hasExactRule(ruleOrSyntax: (Rule | string)): boolean;
+    getExactRuleOf(ruleOrSyntax: (Rule | string)): (Rule | null);
 }

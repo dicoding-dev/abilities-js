@@ -1,4 +1,10 @@
 import { FieldAttribute } from '../utils/typings';
+declare enum FieldType {
+    ALL = 0,
+    SINGULAR_FIELD = 1,
+    ARRAY = 2,
+    OBJECT = 3
+}
 export declare class Resource {
     private resource;
     private field;
@@ -27,9 +33,12 @@ export declare class Resource {
      * @returns boolean
      */
     matchField(field: FieldAttribute): any;
+    isEqualWith(other: Resource): boolean;
+    getFieldType(): FieldType;
     /**
      * @returns bool
      */
     private isSingularField;
     toString(): string;
 }
+export {};

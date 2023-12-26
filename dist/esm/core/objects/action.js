@@ -8,12 +8,18 @@ export class Action {
         if (this.action.length < 1) {
             throw new Error('Action must not be empty');
         }
+        if (!this.action.match(/^(([a-zA-Z0-9_\-])+|([*]){1})$/)) {
+            throw new Error('Invalid action naming. Please use a combination of lowercase letter, number, dash and underscore only or a single star (*) character');
+        }
     }
     /**
      * @returns string
      */
     get() {
         return this.action;
+    }
+    wholeAction() {
+        return this.get() === '*';
     }
     toString() {
         return this.get();

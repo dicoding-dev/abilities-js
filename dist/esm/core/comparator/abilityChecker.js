@@ -100,30 +100,17 @@ export class AbilityChecker {
         // @ts-ignore
         return !this.can(...args);
     }
-    /**
-     * Use the same approach as method `can()` does. But via customized syntax or rules.
-     * Via Syntax :
-     * scope:resource/field:action
-     *
-     *
-     * @param {(Rule|string)} ruleOrSyntax A syntax (string) for defining rules or with using Rule
-     * @return {boolean} true if the current user has the rule
-     */
-    hasRule(ruleOrSyntax) {
-        return this.getRuleOf(ruleOrSyntax) !== null;
+    hasExactRule(ruleOrSyntax) {
+        return this.getExactRuleOf(ruleOrSyntax) !== null;
     }
-    /**
-     * Get the live rule from constructed rule.
-     * @returns {(Rule|null)}
-     */
-    getRuleOf(ruleOrSyntax) {
+    getExactRuleOf(ruleOrSyntax) {
         let rule = ruleOrSyntax;
         if (!(rule instanceof Rule)) {
             rule = RuleCompiler.compile(rule);
         }
         const queriedRule = this.compiledRules.queryRule(rule.getScope().get(), rule.getResource().getResourceStr(), rule.getAction().get());
         for (const foundRule of queriedRule) {
-            if (foundRule.getResource().matchField(rule.getResource().getField())
+            if (foundRule.getResource().isEqualWith(rule.getResource())
                 && foundRule.inverted() === rule.inverted()) {
                 return foundRule;
             }

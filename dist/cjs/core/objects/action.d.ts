@@ -8,5 +8,6 @@ export declare class Action {
      * @returns string
      */
     get(): string;
+    wholeAction(): boolean;
     toString(): string;
 }

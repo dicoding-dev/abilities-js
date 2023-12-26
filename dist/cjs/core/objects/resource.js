@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Resource = void 0;
 const object_deep_compare_1 = __importDefault(require("object-deep-compare"));
+const utils_1 = require("../utils/utils");
 var FieldType;
 (function (FieldType) {
     FieldType[FieldType["ALL"] = 0] = "ALL";
@@ -24,6 +25,9 @@ class Resource {
         this.field = field;
         if (this.resource.length < 1) {
             throw new Error('Resource must not be empty');
+        }
+        if (!this.resource.match(/^([a-zA-Z0-9_\-])+$/)) {
+            throw new Error('Invalid resource naming. Please use a combination of lowercase letter, number, dash and underscore only');
         }
         this.processField();
     }
@@ -101,6 +105,27 @@ class Resource {
             const result = object_deep_compare_1.default.CompareValuesWithConflicts(this.field, field);
             return result.length === 0;
         }
+    }
+    isEqualWith(other) {
+        if (other.getResourceStr() !== this.getResourceStr()) {
+            return false;
+        }
+        if (other.getFieldType() !== this.getFieldType()) {
+            return false;
+        }
+        switch (this.getFieldType()) {
+            case FieldType.ALL:
+                return true;
+            case FieldType.SINGULAR_FIELD:
+                return other.getField() == this.getField();
+            case FieldType.OBJECT:
+                return object_deep_compare_1.default.CompareValuesWithConflicts(this.getField(), other.getField()).length === 0;
+            case FieldType.ARRAY:
+                return (0, utils_1.isArrayEqual)(this.getField(), other.getField());
+        }
+    }
+    getFieldType() {
+        return this.fieldType;
     }
     /**
      * @returns bool

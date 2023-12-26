@@ -22,6 +22,7 @@ class RuleCompiler {
         let inverted = false;
         if (ruleSyntax[leftCursor] === '!') {
             inverted = true;
+            leftCursor++;
         }
         let scope = '', resource = '', action = '', reachedEndScope = false, reachedEndAction = false;
         while (leftCursor <= rightCursor) {
