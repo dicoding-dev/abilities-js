@@ -47,6 +47,43 @@ describe('can() feature function test', function () {
             .toBe(false);
     });
 
+    it('must return false when the user have inverted rule with whole (star) action', function () {
+        const compiledRules = new CompiledRules([
+            {
+                id : 1,
+                rule : 'scope2:resource1:read'
+            },
+            {
+                id : 2,
+                rule : '!scope1:resource1/666:update'
+            },
+            {
+                id : 3,
+                rule : 'scope1:resource1/[6, 7, 8]:update'
+            },
+            {
+                id : 4,
+                rule : 'scope2:resource1/[6, 7, 8]:update'
+            },
+            {
+                id : 5,
+                rule : 'scope2:resource1:*'
+            },
+            {
+                id : 6,
+                rule : '!scope2:resource1/7:*'
+            },
+            {
+                id : 7,
+                rule : 'scope2:resource1/7:update'
+            },
+        ]);
+
+        const abilityChecker = new AbilityChecker(compiledRules);
+        expect(abilityChecker.can('update', 'resource1', 'scope2', 7))
+            .toBe(false);
+    });
+
     it('must return true when user have rule with ALL action', function () {
         const compiledRules = new CompiledRules([
             {
