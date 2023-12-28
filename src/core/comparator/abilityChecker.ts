@@ -71,22 +71,23 @@ export class AbilityChecker {
             field = argumentLength >= 4 ? args[3] : null;
         }
 
-        const specificActionRules = this.compiledRules.queryRule(scope, resource, action);
+        const unspecifiedActionRules = this.compiledRules.queryRule(scope, resource, '');
         const specificNormalRules = [];
+        const starActionRules = [];
 
-        for(const specificActionRule of specificActionRules) {
+        for(const unspecifiedActionRule of unspecifiedActionRules) {
             /** 1. Checking on specific inverted rules */
-            if (specificActionRule.inverted()) {
-                if (specificActionRule.getResource().matchField(field)) {
-                    return false; // as the correspondent user is prohibited access resource
-                }
-            } else {
-                specificNormalRules.push(specificActionRule);
+            if (unspecifiedActionRule.inverted() && unspecifiedActionRule.getResource().matchField(field)) {
+                return false; // as the correspondent user is prohibited access resource
+            } else if (unspecifiedActionRule.getAction().wholeAction()) {
+                starActionRules.push(unspecifiedActionRule);
+            } else if (unspecifiedActionRule.getAction().get() === action) {
+                specificNormalRules.push(unspecifiedActionRule)
             }
         }
 
         /** 2. Star-<action> rules */
-        const starActionRules = this.compiledRules.queryRule(scope, resource, '*');
+        // const starActionRules = this.compiledRules.queryRule(scope, resource, '*');
         for (const startActionRule of starActionRules) {
             if (startActionRule.getResource().matchField(field)) {
                 return !startActionRule.inverted();
@@ -94,7 +95,7 @@ export class AbilityChecker {
         }
 
         /** 3. Other specific-<action> rules */
-        for (const specificNormalRule of specificActionRules) {
+        for (const specificNormalRule of specificNormalRules) {
             if (specificNormalRule.getResource().matchField(field)) {
                 return true;
             }
