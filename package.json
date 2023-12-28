@@ -1,6 +1,6 @@
 {
   "name": "@dicoding-dev/abilities-js",
-  "version": "0.5.8",
+  "version": "0.5.9",
   "description": "A core package for managing the authorization through CanCanCan style. With supports of granularity based on Attributes Based Access Control.",
   "source": "src/index.ts",
   "main": "dist/cjs/index.js",
