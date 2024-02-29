@@ -10,4 +10,5 @@ export declare class Action {
     get(): string;
     wholeAction(): boolean;
     toString(): string;
+    match(action: string): boolean;
 }
