@@ -32,4 +32,13 @@ export class Action {
     toString(): string {
         return this.get();
     }
+
+    match(action: string): boolean
+    {
+        if (this.wholeAction()) {
+            return true;
+        }
+
+        return this.get() === action;
+    }
 }
