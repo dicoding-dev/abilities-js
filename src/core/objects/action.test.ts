@@ -1,4 +1,4 @@
-import { expect, it, test } from 'vitest';
+import { describe, expect, it, test } from 'vitest';
 import { Action } from "./action";
 
 it('must fail when assigned with empty value', () => {
@@ -29,3 +29,23 @@ test("Successfully define specific action", function () {
 it('can know if the action is whole action (star)', function () {
     expect((new Action('*')).wholeAction()).toBe(true);
 });
+
+describe('match() function test', function () {
+    it('must return true when the current action is whole action', function () {
+        const currentAction = new Action();
+ 
+        expect(currentAction.match('create')).toBe(true);
+        expect(currentAction.match('*')).toBe(true);
+    });
+ 
+    it ('must return true when the match with specific action', function () {
+        const currentAction = new Action('create');
+        expect(currentAction.match('create')).toBe(true);
+    });
+ 
+    it('must return false when not match with specific action', function () {
+        const currentAction = new Action('create');
+        expect(currentAction.match('update')).toBe(false);
+    });
+ });
+ 

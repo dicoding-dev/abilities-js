@@ -24,4 +24,10 @@ export class Action {
     toString() {
         return this.get();
     }
+    match(action) {
+        if (this.wholeAction()) {
+            return true;
+        }
+        return this.get() === action;
+    }
 }

@@ -77,7 +77,9 @@ export class AbilityChecker {
 
         for(const unspecifiedActionRule of unspecifiedActionRules) {
             /** 1. Checking on specific inverted rules */
-            if (unspecifiedActionRule.inverted() && unspecifiedActionRule.getResource().matchField(field)) {
+            if (unspecifiedActionRule.inverted() &&
+                unspecifiedActionRule.getResource().matchField(field) &&
+                unspecifiedActionRule.getAction().match(action)) {
                 return false; // as the correspondent user is prohibited access resource
             } else if (unspecifiedActionRule.getAction().wholeAction()) {
                 starActionRules.push(unspecifiedActionRule);

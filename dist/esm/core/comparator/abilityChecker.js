@@ -62,28 +62,32 @@ export class AbilityChecker {
             scope = argumentLength >= 3 ? args[2] : scope;
             field = argumentLength >= 4 ? args[3] : null;
         }
-        const specificActionRules = this.compiledRules.queryRule(scope, resource, action);
+        const unspecifiedActionRules = this.compiledRules.queryRule(scope, resource, '');
         const specificNormalRules = [];
-        for (const specificActionRule of specificActionRules) {
+        const starActionRules = [];
+        for (const unspecifiedActionRule of unspecifiedActionRules) {
             /** 1. Checking on specific inverted rules */
-            if (specificActionRule.inverted()) {
-                if (specificActionRule.getResource().matchField(field)) {
-                    return false; // as the correspondent user is prohibited access resource
-                }
+            if (unspecifiedActionRule.inverted() &&
+                unspecifiedActionRule.getResource().matchField(field) &&
+                unspecifiedActionRule.getAction().match(action)) {
+                return false; // as the correspondent user is prohibited access resource
             }
-            else {
-                specificNormalRules.push(specificActionRule);
+            else if (unspecifiedActionRule.getAction().wholeAction()) {
+                starActionRules.push(unspecifiedActionRule);
+            }
+            else if (unspecifiedActionRule.getAction().get() === action) {
+                specificNormalRules.push(unspecifiedActionRule);
             }
         }
         /** 2. Star-<action> rules */
-        const starActionRules = this.compiledRules.queryRule(scope, resource, '*');
+        // const starActionRules = this.compiledRules.queryRule(scope, resource, '*');
         for (const startActionRule of starActionRules) {
             if (startActionRule.getResource().matchField(field)) {
                 return !startActionRule.inverted();
             }
         }
         /** 3. Other specific-<action> rules */
-        for (const specificNormalRule of specificActionRules) {
+        for (const specificNormalRule of specificNormalRules) {
             if (specificNormalRule.getResource().matchField(field)) {
                 return true;
             }
