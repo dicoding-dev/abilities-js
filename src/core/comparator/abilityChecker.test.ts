@@ -154,6 +154,33 @@ describe('can() feature function test', function () {
         expect(abilityChecker.can('update', 'resource1', 'scope1', {'author' : 666}))
             .toBeFalsy();
     });
+
+    it('must return as expected when has inverted specific action and whole field rule compared with rule that has specific field with whole action', function () {
+        const compiledRules = new CompiledRules([
+            {
+                'id' : 2,
+                'rule' : '!scope1:resource1/*:review'
+            },
+            {
+                'id' : 3,
+                'rule' : 'scope1:resource1/{"author": 667}:*'
+            }
+        ]);
+
+        const abilityChecker = new AbilityChecker(compiledRules);
+        expect(abilityChecker.can('update', 'resource1', 'scope1', {'author' : 667}))
+            .toBe(true);
+        expect(abilityChecker.can('update', 'resource1', 'scope1'))
+            .toBe(false);
+        expect(abilityChecker.can('*', 'resource1', 'scope1'))
+            .toBe(false);
+        expect(abilityChecker.can('review', 'resource1', 'scope1', {'author' : 667}))
+            .toBe(false);
+        expect(abilityChecker.can('review', 'resource1', 'scope1'))
+            .toBe(false);
+        expect(abilityChecker.can('review', 'resource1', 'scope1', {'author' : 666}))
+            .toBe(false);
+    });
 });
 
 describe('cannot() feature function test', function () {
